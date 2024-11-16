@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.GroupMapper">
+
+    <insert id="insert_Group">
+        INSERT INTO user_group (group_id, web_id) VALUES (#{groupId}, #{webId})
+    </insert>
+    <update id="updateGroup">
+        update user_group
+        set group_id=#{group_id}
+        where web_id=#{web_id};
+    </update>
+    <delete id="delete_Group">
+        DELETE FROM user_group WHERE group_id = #{groupId} AND web_id = #{webId}
+    </delete>
+    <select id="researchById" resultType="java.lang.Integer">
+        SELECT group_id FROM user_group where web_id=#{webId}
+    </select>
+    <select id="researchByGroupId" resultType="java.lang.String">
+        SELECT web_id FROM user_group where group_id=#{groupId}
+    </select>
+    <select id="researchAllId" resultType="java.lang.Integer">
+        SELECT group_id FROM user_group
+    </select>
+</mapper>
+<!--    //    CREATE TABLE user_group (
+//    id INT AUTO_INCREMENT PRIMARY KEY, 自增主键
+//    group_id INT,
+//    web_id VARCHAR(100),
+//    UNIQUE KEY (group_id, web_id)
+//);-->

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.mapper.PeerMapper">
+    <!-- 根据 web_id 查询所有 peer_id -->
+    <select id="selectPeerIdsByWebId" resultType="String" parameterType="String">
+        SELECT peer_id FROM peer WHERE web_id = #{webId}
+    </select>
+
+    <!-- 插入新记录 -->
+    <insert id="insertPeer" useGeneratedKeys="true" >
+        INSERT INTO peer (web_id, peer_id, peer_status) VALUES (#{webId}, #{peerId}, #{peerStatus})
+    </insert>
+
+    <!-- 根据 web_id 和 peer_id 删除记录 -->
+    <delete id="deletePeer" parameterType="map">
+        DELETE FROM peer WHERE web_id = #{webId} AND peer_id = #{peerId}
+    </delete>
+
+    <!-- 根据 peer_id 查询所有 web_id -->
+    <select id="selectWebIdsByPeerId" resultType="String" parameterType="String">
+        SELECT web_id FROM peer WHERE peer_id = #{peerId}
+    </select>
+    <select id="selectPeerStatus" resultType="int">
+        SELECT peer_status FROM peer WHERE peer_id=#{peerId} AND web_id=#{webId};
+    </select>
+
+</mapper>
